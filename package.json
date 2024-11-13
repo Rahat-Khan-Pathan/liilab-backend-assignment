@@ -1,4 +1,14 @@
 {
+  "name": "OpenPTE Clone",
+  "version": "0.0.1",
+  "main": "app.ts",
+  "author": "Rahat Khan Pathan",
+  "scripts": {
+    "dev": "ts-node-dev src/app.ts",
+    "seed": "ts-node-dev src/seedData/seed.ts",
+    "build": "tsc",
+    "start": "node ./dist/app.js"
+  },
   "dependencies": {
     "@prisma/client": "^4.4.0",
     "bcryptjs": "^2.4.3",
