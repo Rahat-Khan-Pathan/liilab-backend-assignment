@@ -18,20 +18,22 @@ model TrackInfo {
   audioUrl      String       @db.Text()
   speaker       String       @db.Text()
   language      String       @db.Text()
-  SstQuestion   SstQuestion? @relation(fields: [sstQuestionId], references: [id])
   sstQuestionId Int?
-  createdAt     DateTime     @default(now())
-  updatedAt     DateTime     @updatedAt
+  SstQuestion   SstQuestion? @relation(fields: [sstQuestionId], references: [id])
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
 
 model SstQuestion {
   id              Int         @id @default(autoincrement())
   title           String      @db.Text()
   answerTimeLimit Int
-  trackInfos      TrackInfo[]
-  createdAt       DateTime    @default(now())
-  updatedAt       DateTime    @updatedAt
-  Question        Question[]
+  TrackInfos      TrackInfo[]
+  Questions       Question[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
 
 model Question {
@@ -39,4 +41,9 @@ model Question {
   type          PteQuestionType
   sstQuestionId Int
   SstQuestion   SstQuestion     @relation(fields: [sstQuestionId], references: [id])
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([type, sstQuestionId])
 }
