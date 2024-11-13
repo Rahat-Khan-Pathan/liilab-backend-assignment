@@ -1,6 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -8,4 +5,38 @@ generator client {
 datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
+}
+
+enum PteQuestionType {
+  SST
+  RO
+  RMMCQ
+}
+
+model TrackInfo {
+  id            Int          @id @default(autoincrement())
+  audioUrl      String       @db.Text()
+  speaker       String       @db.Text()
+  language      String       @db.Text()
+  SstQuestion   SstQuestion? @relation(fields: [sstQuestionId], references: [id])
+  sstQuestionId Int?
+  createdAt     DateTime     @default(now())
+  updatedAt     DateTime     @updatedAt
+}
+
+model SstQuestion {
+  id              Int         @id @default(autoincrement())
+  title           String      @db.Text()
+  answerTimeLimit Int
+  trackInfos      TrackInfo[]
+  createdAt       DateTime    @default(now())
+  updatedAt       DateTime    @updatedAt
+  Question        Question[]
+}
+
+model Question {
+  id            Int             @id @default(autoincrement())
+  type          PteQuestionType
+  sstQuestionId Int
+  SstQuestion   SstQuestion     @relation(fields: [sstQuestionId], references: [id])
 }
