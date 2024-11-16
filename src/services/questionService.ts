@@ -28,6 +28,7 @@ const GetAllAsync = async (req: Request, res: Response) => {
 			type?: QuestionType;
 		} = {};
 
+		// type should be in enum i.e. SST, RO or RMMCQ in capital letter
 		if (
 			type &&
 			Object.values(QuestionType).includes(type as QuestionType)
@@ -97,6 +98,7 @@ const GetDetailsAsync = async (req: Request, res: Response) => {
 	}
 };
 
+// return id, title and type as response
 const Map = (
 	question: Question & {
 		SstQuestion: SstQuestion | null;
@@ -104,34 +106,22 @@ const Map = (
 		RmmcqQuestion: RmmcqQuestion | null;
 	}
 ): IQuestionResponse => {
-	let questionResponse: IQuestionResponse;
-
-	if (question.type == QuestionType.SST) {
-		questionResponse = {
-			id: question.id,
-			title: question.SstQuestion!.title,
-			type: question.type,
-			createdAt: question.createdAt,
-		};
-	} else if (question.type == QuestionType.RO) {
-		questionResponse = {
-			id: question.id,
-			title: question.RoQuestion!.title,
-			type: question.type,
-			createdAt: question.createdAt,
-		};
-	} else {
-		questionResponse = {
-			id: question.id,
-			title: question.RmmcqQuestion!.title,
-			type: question.type,
-			createdAt: question.createdAt,
-		};
-	}
+	const questionResponse: IQuestionResponse = {
+		id: question.id,
+		title:
+			question.type == QuestionType.SST
+				? question.SstQuestion!.title
+				: question.type == QuestionType.RO
+				? question.RoQuestion!.title
+				: question.RmmcqQuestion!.title,
+		type: question.type,
+		createdAt: question.createdAt,
+	};
 
 	return questionResponse;
 };
 
+// return detailed response by type
 const MapDetails = (
 	question: Question & {
 		SstQuestion:
