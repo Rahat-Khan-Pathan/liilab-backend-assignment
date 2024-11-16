@@ -39,7 +39,6 @@ const CreateAsync = async (
 	scoreId: number,
 	answerId: number
 ) => {
-	console.log(type, questionId);
 	const submission = await prisma.submission.create({
 		data: {
 			type: type,

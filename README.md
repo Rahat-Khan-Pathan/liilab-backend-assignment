@@ -23,6 +23,12 @@ PORT=7869
 npx prisma migrate dev
 ```
 
+4. Run the project using the following script:
+
+```
+npm run dev
+```
+
 ## Base URL
 
 ```

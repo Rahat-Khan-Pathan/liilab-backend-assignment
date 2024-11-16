@@ -33,7 +33,6 @@ const seedAudios = async () => {
 	await prisma.audio.createMany({
 		data: audios,
 	});
-	console.log("Seed data for audios inserted successfully!");
 };
 
 const seedParagraphs = async () => {
@@ -59,8 +58,6 @@ const seedParagraphs = async () => {
 	await prisma.paragraph.createMany({
 		data: paragraphs,
 	});
-
-	console.log("Seed data for paragraphs inserted successfully!");
 };
 
 const seedOptions = async () => {
@@ -91,8 +88,6 @@ const seedOptions = async () => {
 	await prisma.option.createMany({
 		data: options,
 	});
-
-	console.log("Seed data for options inserted successfully!");
 };
 
 const seedSstQuestions = async () => {
@@ -111,8 +106,6 @@ const seedSstQuestions = async () => {
 	await prisma.sstQuestion.create({
 		data: sstQuestions[0],
 	});
-
-	console.log("Seed data for sst questions inserted successfully!");
 };
 
 const seedRoQuestions = async () => {
@@ -130,8 +123,6 @@ const seedRoQuestions = async () => {
 	await prisma.roQuestion.create({
 		data: roQuestions[0],
 	});
-
-	console.log("Seed data for ro questions inserted successfully!");
 };
 
 const seedRmmcqQuestions = async () => {
@@ -156,8 +147,6 @@ const seedRmmcqQuestions = async () => {
 	await prisma.rmmcqQuestion.create({
 		data: rmmcqQuestions[0],
 	});
-
-	console.log("Seed data for rmmcq questions inserted successfully!");
 };
 
 const seedQuestions = async () => {
