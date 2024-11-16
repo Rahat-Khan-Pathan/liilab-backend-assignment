@@ -1,0 +1,148 @@
+{
+	"info": {
+		"_postman_id": "9fa097b8-f353-437f-8480-580abf42af87",
+		"name": "LiiLab Assignment",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "18395972"
+	},
+	"item": [
+		{
+			"name": "Seed Data",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:7869/seedData",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "7869",
+					"path": [
+						"seedData"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get All Questions",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:7869/api/question?page=1&limit=2&type=SST",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "7869",
+					"path": [
+						"api",
+						"question"
+					],
+					"query": [
+						{
+							"key": "page",
+							"value": "1"
+						},
+						{
+							"key": "limit",
+							"value": "2"
+						},
+						{
+							"key": "type",
+							"value": "SST"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Question Details",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:7869/api/question/3",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "7869",
+					"path": [
+						"api",
+						"question",
+						"3"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Submit Answer",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"text\": \"Answer\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:7869/api/submission/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "7869",
+					"path": [
+						"api",
+						"submission",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Submission History",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:7869/api/submission?page=1&limit=2&type=SST",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "7869",
+					"path": [
+						"api",
+						"submission"
+					],
+					"query": [
+						{
+							"key": "page",
+							"value": "1"
+						},
+						{
+							"key": "limit",
+							"value": "2"
+						},
+						{
+							"key": "type",
+							"value": "SST"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
