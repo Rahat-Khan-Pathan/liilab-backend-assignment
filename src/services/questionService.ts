@@ -1,9 +1,5 @@
 import { QuestionRepository } from "../Repositories/Question/QuestionRepository";
-import {
-	IQuestionDetailsResponse,
-	IQuestionDetailsServiceResponse,
-	IQuestionServiceResponse,
-} from "../DTO/Response/QuestionResponse";
+import { IQuestionDetailsResponse } from "../DTO/Response/QuestionResponse";
 import { IQuestionResponse } from "../DTO/Response/QuestionResponse";
 import { defaultErrorHandler } from "../Utils/error";
 import {
@@ -17,6 +13,10 @@ import {
 	Paragraph,
 } from "@prisma/client";
 import { Request, Response } from "express";
+import {
+	IQuestionDetailsServiceResponseModel,
+	IQuestionServiceResponseModel,
+} from "@/DTO/Response/QuestionServiceResponseModel";
 
 const GetAllAsync = async (req: Request, res: Response) => {
 	try {
@@ -38,7 +38,7 @@ const GetAllAsync = async (req: Request, res: Response) => {
 
 		const questions = await QuestionRepository.GetAllAsync(searchParams);
 
-		const response: IQuestionServiceResponse = {
+		const response: IQuestionServiceResponseModel = {
 			success: true,
 			data: {
 				questions: questions.map((qs) => Map(qs)),
@@ -80,7 +80,7 @@ const GetDetailsAsync = async (req: Request, res: Response) => {
 			});
 		}
 
-		const response: IQuestionDetailsServiceResponse = {
+		const response: IQuestionDetailsServiceResponseModel = {
 			success: true,
 			data: {
 				question: MapDetails(question),

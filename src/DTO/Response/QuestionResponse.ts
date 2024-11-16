@@ -34,20 +34,3 @@ export interface IQuestionDetailsResponse extends IQuestionResponse {
 		  }[]
 		| null;
 }
-
-interface IResponseModel {
-	success: boolean;
-	message: string;
-}
-
-export interface IQuestionServiceResponse extends IResponseModel {
-	data: {
-		questions: IQuestionResponse[];
-	};
-}
-
-export interface IQuestionDetailsServiceResponse extends IResponseModel {
-	data: {
-		question: IQuestionDetailsResponse;
-	};
-}
