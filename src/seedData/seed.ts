@@ -139,7 +139,7 @@ const seedRmmcqQuestions = async () => {
 		{
 			id: 1,
 			title: "Writing Technology",
-			passage: `Writing technology has revolutionized the way we communicate and express our thoughts. From the invention of the printing press to the advent of word processors and now to AI-powered writing assistants, each advancement has brought us closer to a world where ideas can be shared more efficiently and effectively. The printing press democratized knowledge, making books accessible to the masses. The typewriter streamlined the writing process, while the word processor brought about a new level of editing ease. Today, AI-powered writing technology like grammar checkers and style editors help us refine our writing, making it more clear, concise, and powerful. Moreover, AI can now generate human-like text, aiding in tasks ranging from drafting emails to writing articles. This not only saves time but also helps overcome writer's block. However, it's important to use such technology responsibly, ensuring originality and authenticity in our writing. In the future, we can expect writing technology to become even more sophisticated, perhaps offering personalized writing style suggestions and even understanding context better. As we continue to innovate, the act of writing will become more about the art of storytelling and less about the mechanics of grammar and syntax. This is the power and promise of writing technology.`,
+			passage: `Writing technology has revolutionized the way we communicate and express our thoughts. From the invention of the printing press to the advent of word processors and now to AI-powered writing assistants, each advancement has brought us closer to a world where ideas can be shared more efficiently and effectively.`,
 			Options: {
 				connect: [
 					{ id: 1 },
@@ -194,6 +194,8 @@ const seedQuestions = async () => {
 };
 export const seedData = async (req: Request, res: Response) => {
 	try {
+		await prisma.submission.deleteMany({});
+
 		await seedAudios();
 		await seedParagraphs();
 		await seedOptions();
