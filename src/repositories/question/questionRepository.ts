@@ -1,16 +1,15 @@
+import { PrismaClient } from "@prisma/client";
 import {
-	PrismaClient,
-	Question,
-	SstQuestion,
-	Audio,
-	RoQuestion,
-	RmmcqQuestion,
-} from "@prisma/client";
-import { IQuestionFilterParam } from "./QuestionFilterParam";
+	IQuestionFilterParam,
+	IQuestionPagingModel,
+} from "./QuestionFilterParam";
 
 const prisma = new PrismaClient();
 
-const GetAllAsync = async (filter: IQuestionFilterParam) => {
+const GetAllAsync = async (
+	filter: IQuestionFilterParam,
+	paging: IQuestionPagingModel
+) => {
 	const questions = await prisma.question.findMany({
 		where: filter,
 		include: {
@@ -21,9 +20,19 @@ const GetAllAsync = async (filter: IQuestionFilterParam) => {
 		orderBy: {
 			createdAt: "asc",
 		},
+		skip: paging.skip,
+		take: paging.take,
 	});
 
 	return questions;
+};
+
+const GetByIdAsync = async (filter: IQuestionFilterParam) => {
+	const question = await prisma.question.findUnique({
+		where: filter,
+	});
+
+	return question;
 };
 
 const GetDetailsAsync = async (filter: IQuestionFilterParam) => {
@@ -54,4 +63,5 @@ const GetDetailsAsync = async (filter: IQuestionFilterParam) => {
 export const QuestionRepository = {
 	GetAllAsync,
 	GetDetailsAsync,
+	GetByIdAsync,
 };

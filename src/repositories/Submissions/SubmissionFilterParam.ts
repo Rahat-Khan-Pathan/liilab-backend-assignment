@@ -1,11 +1,11 @@
 import { QuestionType } from "@prisma/client";
 
-export interface IQuestionFilterParam {
+export interface ISubmissionsFilterParam {
 	type?: QuestionType;
 	id?: number;
 }
 
-export interface IQuestionPagingModel {
+export interface ISubmissionPagingModel {
 	skip?: number;
 	take?: number;
 }

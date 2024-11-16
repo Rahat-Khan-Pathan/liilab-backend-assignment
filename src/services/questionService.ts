@@ -16,7 +16,7 @@ import { Request, Response } from "express";
 import {
 	IQuestionDetailsServiceResponseModel,
 	IQuestionServiceResponseModel,
-} from "@/DTO/Response/QuestionServiceResponseModel";
+} from "@/DTO/Response/ServiceResponseModel";
 
 const GetAllAsync = async (req: Request, res: Response) => {
 	try {
@@ -36,7 +36,18 @@ const GetAllAsync = async (req: Request, res: Response) => {
 			searchParams.type = type as QuestionType;
 		}
 
-		const questions = await QuestionRepository.GetAllAsync(searchParams);
+		let { page, limit } = req.query as Record<string, string>;
+
+		if (!page) page = "1";
+		if (!limit) limit = "10";
+
+		const take = parseInt(limit, 10);
+		const skip = (parseInt(page, 10) - 1) * take;
+
+		const questions = await QuestionRepository.GetAllAsync(searchParams, {
+			skip: skip,
+			take: take,
+		});
 
 		const response: IQuestionServiceResponseModel = {
 			success: true,

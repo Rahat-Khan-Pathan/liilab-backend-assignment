@@ -1,6 +1,6 @@
 import { QuestionType } from "@prisma/client";
 
-export interface IQuestionRequest {
+export interface ISubmissionRequest {
 	type: QuestionType;
 	answer: string | number[];
 }

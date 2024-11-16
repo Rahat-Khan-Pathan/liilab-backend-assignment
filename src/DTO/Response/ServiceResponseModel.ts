@@ -2,8 +2,9 @@ import {
 	IQuestionDetailsResponse,
 	IQuestionResponse,
 } from "./QuestionResponse";
+import { ISubmissionsResponse } from "./SubmissionResponse";
 
-interface IResponseModel {
+export interface IResponseModel {
 	success: boolean;
 	message: string;
 }
@@ -17,5 +18,11 @@ export interface IQuestionServiceResponseModel extends IResponseModel {
 export interface IQuestionDetailsServiceResponseModel extends IResponseModel {
 	data: {
 		question: IQuestionDetailsResponse;
+	};
+}
+
+export interface ISubmissionServiceResponseModel extends IResponseModel {
+	data: {
+		submissions: ISubmissionsResponse[];
 	};
 }
