@@ -11,30 +11,69 @@ async function main() {
 			speaker: "Amy",
 			language: "UK",
 		},
+		{
+			id: 2,
+			audioUrl:
+				"https://sgp1.digitaloceanspaces.com/liilab/quizbit/media/en-US_John_1722755742194.m4a",
+			speaker: "John",
+			language: "US",
+		},
+		{
+			id: 3,
+			audioUrl:
+				"https://sgp1.digitaloceanspaces.com/liilab/quizbit/media/en-GB_Emma_1722755742195.m4a",
+			speaker: "Emma",
+			language: "UK",
+		},
 	];
 
 	await prisma.trackInfo.deleteMany({});
-
 	await prisma.trackInfo.createMany({
 		data: trackInfos,
 		skipDuplicates: true,
 	});
 
 	const sstQuestions = [
-		{ id: 1, title: "Demo 1", answerTimeLimit: 10, TrackInfos: trackInfos },
+		{
+			id: 1,
+			title: "Evolution of Medicare",
+			answerTimeLimit: 10,
+			TrackInfos: {
+				connect: [{ id: 1 }, { id: 2 }],
+			},
+		},
+		{
+			id: 2,
+			title: "Rhythmic History",
+			answerTimeLimit: 15,
+			TrackInfos: {
+				connect: [{ id: 2 }],
+			},
+		},
+		{
+			id: 3,
+			title: "Role of Tears",
+			answerTimeLimit: 12,
+			TrackInfos: {
+				connect: [{ id: 3 }],
+			},
+		},
 	];
 
 	await prisma.sstQuestion.deleteMany({});
+	for (const sstQuestion of sstQuestions) {
+		await prisma.sstQuestion.create({
+			data: sstQuestion,
+		});
+	}
 
-	await prisma.sstQuestion.createMany({
-		data: sstQuestions,
-		skipDuplicates: true,
-	});
-
-	const questions = [{ id: 1, type: QuestionType.SST, sstQuestionId: 1 }];
+	const questions = [
+		{ id: 1, type: QuestionType.SST, sstQuestionId: 1 },
+		{ id: 2, type: QuestionType.SST, sstQuestionId: 2 },
+		{ id: 3, type: QuestionType.SST, sstQuestionId: 3 },
+	];
 
 	await prisma.question.deleteMany({});
-
 	await prisma.question.createMany({
 		data: questions,
 		skipDuplicates: true,

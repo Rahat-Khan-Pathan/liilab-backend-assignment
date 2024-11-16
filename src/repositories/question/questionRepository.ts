@@ -1,16 +1,10 @@
-import {
-	PrismaClient,
-	Question,
-	QuestionType,
-	SstQuestion,
-	TrackInfo,
-} from "@prisma/client";
-import { IQuestionFilterParam } from "./questionFilterParam";
+import { PrismaClient, Question, SstQuestion, TrackInfo } from "@prisma/client";
+import { IQuestionFilterParam } from "./QuestionFilterParam";
 
 const prisma = new PrismaClient();
 
-export const questionRepository = {
-	getAllAsync: async (
+export const QuestionRepository = {
+	GetAllAsync: async (
 		filter: IQuestionFilterParam
 	): Promise<
 		(Question & {
@@ -30,7 +24,7 @@ export const questionRepository = {
 		return questions;
 	},
 
-	getDetailsAsync: async (
+	GetDetailsAsync: async (
 		filter: IQuestionFilterParam
 	): Promise<
 		| (Question & {

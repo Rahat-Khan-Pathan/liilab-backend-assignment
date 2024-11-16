@@ -14,12 +14,11 @@ enum QuestionType {
 }
 
 model TrackInfo {
-  id            Int          @id @default(autoincrement())
-  audioUrl      String       @db.Text()
-  speaker       String       @db.Text()
-  language      String       @db.Text()
-  sstQuestionId Int?
-  SstQuestion   SstQuestion? @relation(fields: [sstQuestionId], references: [id])
+  id           Int           @id @default(autoincrement())
+  audioUrl     String        @db.Text()
+  speaker      String        @db.Text()
+  language     String        @db.Text()
+  SstQuestions SstQuestion[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt

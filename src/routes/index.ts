@@ -1,7 +1,8 @@
 import { Router } from "express";
+import QuestionRoutes from "./questionRoutes";
 
 const apiRoutes = Router();
 
-// apiRoutes.use("/users", userRouter);
+apiRoutes.use("/question", QuestionRoutes);
 
 export default apiRoutes;

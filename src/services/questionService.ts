@@ -1,91 +1,96 @@
+import { QuestionRepository } from "../Repositories/Question/QuestionRepository";
 import {
 	IQuestionServiceResponse,
 	ISstQuestionDetailsResponse,
 	ISstQuestionDetailsServiceResponse,
-} from "../models/response/questionResponse";
-import { IQuestionResponse } from "@/models/response/questionResponse";
-import { questionRepository } from "@/repositories/question/questionRepository";
-import { defaultErrorHandler } from "@/utils/error";
+} from "../DTO/Response/QuestionResponse";
+import { IQuestionResponse } from "../DTO/Response/QuestionResponse";
+import { defaultErrorHandler } from "../Utils/error";
 import { Question, QuestionType, SstQuestion, TrackInfo } from "@prisma/client";
-import { RequestHandler } from "express";
+import { Request, Response } from "express";
 
-export const getAllAsync: RequestHandler = async (req, res) => {
-	try {
-		const { type } = req.query as {
-			type: string;
-		};
+export const QuestionService = {
+	getAllAsync: async (req: Request, res: Response) => {
+		try {
+			const { type } = req.query as {
+				type: string;
+			};
 
-		const searchParams: {
-			type?: QuestionType;
-		} = {};
+			const searchParams: {
+				type?: QuestionType;
+			} = {};
 
-		if (
-			type &&
-			Object.values(QuestionType).includes(type as QuestionType)
-		) {
-			searchParams.type = type as QuestionType;
-		}
+			if (
+				type &&
+				Object.values(QuestionType).includes(type as QuestionType)
+			) {
+				searchParams.type = type as QuestionType;
+			}
 
-		const questions = await questionRepository.getAllAsync(searchParams);
+			const questions = await QuestionRepository.GetAllAsync(
+				searchParams
+			);
 
-		const response: IQuestionServiceResponse = {
-			success: true,
-			data: {
-				questions: questions.map((qs) => Map(qs)),
-			},
-			message: "Tags retrieved successfully.",
-		};
+			const response: IQuestionServiceResponse = {
+				success: true,
+				data: {
+					questions: questions.map((qs) => Map(qs)),
+				},
+				message: "Tags retrieved successfully.",
+			};
 
-		res.status(200).json(response);
-	} catch (err: any) {
-		return defaultErrorHandler({
-			res,
-			status: 500,
-			message: err,
-		});
-	}
-};
-
-export const getDetailsAsync: RequestHandler = async (req, res) => {
-	try {
-		const { id } = req.params as {
-			id: string;
-		};
-
-		const searchParams: {
-			id?: number;
-		} = {};
-
-		if (id) {
-			searchParams.id = parseInt(id);
-		}
-
-		const question = await questionRepository.getDetailsAsync(searchParams);
-
-		if (question == null) {
+			res.status(200).json(response);
+		} catch (err: any) {
 			return defaultErrorHandler({
 				res,
-				status: 404,
-				message: "No question found!",
+				status: 500,
+				message: err,
 			});
 		}
+	},
+	getDetailsAsync: async (req: Request, res: Response) => {
+		try {
+			const { id } = req.params as {
+				id: string;
+			};
 
-		const response: ISstQuestionDetailsServiceResponse = {
-			success: true,
-			data: {
-				question: MapDetails(question),
-			},
-			message: "Tags retrieved successfully.",
-		};
+			const searchParams: {
+				id?: number;
+			} = {};
 
-		res.status(200).json(response);
-	} catch (err: any) {
-		return defaultErrorHandler({
-			res,
-			status: 500,
-			message: err,
-		});
-	}
+			if (id) {
+				searchParams.id = parseInt(id);
+			}
+
+			const question = await QuestionRepository.GetDetailsAsync(
+				searchParams
+			);
+
+			if (question == null) {
+				return defaultErrorHandler({
+					res,
+					status: 404,
+					message: "No question found!",
+				});
+			}
+
+			const response: ISstQuestionDetailsServiceResponse = {
+				success: true,
+				data: {
+					question: MapDetails(question),
+				},
+				message: "Tags retrieved successfully.",
+			};
+
+			res.status(200).json(response);
+		} catch (err: any) {
+			return defaultErrorHandler({
+				res,
+				status: 500,
+				message: err,
+			});
+		}
+	},
 };
 
 const Map = (
