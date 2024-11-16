@@ -76,19 +76,18 @@ GET http://localhost:7869/api/question?page=1&limit=2&type=SST
 
 ```json
 {
-    "success": true,
-    "data": {
-        "questions": [
-            {
-                "id": 1,
-                "title": "Evolution of Medicare",
-                "type": "SST",
-                "createdAt": "2024-11-16T11:28:17.052Z"
-            },
-            ...
-        ]
-    },
-    "message": "Questions retrieved successfully."
+	"success": true,
+	"data": {
+		"questions": [
+			{
+				"id": 1,
+				"title": "Evolution of Medicare",
+				"type": "SST",
+				"createdAt": "2024-11-16T11:28:17.052Z"
+			}
+		]
+	},
+	"message": "Questions retrieved successfully."
 }
 ```
 
