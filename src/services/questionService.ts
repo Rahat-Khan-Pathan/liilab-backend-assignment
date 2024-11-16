@@ -1,6 +1,6 @@
-import { QuestionRepository } from "../Repositories/Question/QuestionRepository";
-import { IQuestionDetailsResponse } from "../DTO/Response/QuestionResponse";
-import { IQuestionResponse } from "../DTO/Response/QuestionResponse";
+import { QuestionRepository } from "../Repositories/Questions/QuestionRepository";
+import { IQuestionDetailsResponse } from "../DTO/Responses/QuestionResponse";
+import { IQuestionResponse } from "../DTO/Responses/QuestionResponse";
 import { defaultErrorHandler } from "../Utils/error";
 import {
 	Question,
@@ -16,7 +16,7 @@ import { Request, Response } from "express";
 import {
 	IQuestionDetailsServiceResponseModel,
 	IQuestionServiceResponseModel,
-} from "@/DTO/Response/ServiceResponseModel";
+} from "@/DTO/Responses/ServiceResponseModel";
 
 const GetAllAsync = async (req: Request, res: Response) => {
 	try {
