@@ -1,50 +1,57 @@
-import { PrismaClient, Question, SstQuestion, TrackInfo } from "@prisma/client";
+import {
+	PrismaClient,
+	Question,
+	SstQuestion,
+	Audio,
+	RoQuestion,
+	RmmcqQuestion,
+} from "@prisma/client";
 import { IQuestionFilterParam } from "./QuestionFilterParam";
 
 const prisma = new PrismaClient();
 
-export const QuestionRepository = {
-	GetAllAsync: async (
-		filter: IQuestionFilterParam
-	): Promise<
-		(Question & {
-			SstQuestion: SstQuestion;
-		})[]
-	> => {
-		const questions = await prisma.question.findMany({
-			where: filter,
-			include: {
-				SstQuestion: true,
-			},
-			orderBy: {
-				createdAt: "desc",
-			},
-		});
+const GetAllAsync = async (filter: IQuestionFilterParam) => {
+	const questions = await prisma.question.findMany({
+		where: filter,
+		include: {
+			SstQuestion: true,
+			RoQuestion: true,
+			RmmcqQuestion: true,
+		},
+		orderBy: {
+			createdAt: "asc",
+		},
+	});
 
-		return questions;
-	},
+	return questions;
+};
 
-	GetDetailsAsync: async (
-		filter: IQuestionFilterParam
-	): Promise<
-		| (Question & {
-				SstQuestion: SstQuestion & {
-					TrackInfos: TrackInfo[];
-				};
-		  })
-		| null
-	> => {
-		const question = await prisma.question.findUnique({
-			where: filter,
-			include: {
-				SstQuestion: {
-					include: {
-						TrackInfos: true,
-					},
+const GetDetailsAsync = async (filter: IQuestionFilterParam) => {
+	const question = await prisma.question.findUnique({
+		where: filter,
+		include: {
+			SstQuestion: {
+				include: {
+					Audios: true,
 				},
 			},
-		});
+			RoQuestion: {
+				include: {
+					Paragraphs: true,
+				},
+			},
+			RmmcqQuestion: {
+				include: {
+					Options: true,
+				},
+			},
+		},
+	});
 
-		return question;
-	},
+	return question;
+};
+
+export const QuestionRepository = {
+	GetAllAsync,
+	GetDetailsAsync,
 };

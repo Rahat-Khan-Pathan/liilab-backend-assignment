@@ -3,7 +3,7 @@ import express from "express";
 
 const QuestionRoutes = express.Router();
 
-QuestionRoutes.get("/", QuestionService.getAllAsync);
-QuestionRoutes.get("/:id", QuestionService.getDetailsAsync);
+QuestionRoutes.get("/", QuestionService.GetAllAsync);
+QuestionRoutes.get("/:id", QuestionService.GetDetailsAsync);
 
 export default QuestionRoutes;

@@ -13,33 +13,80 @@ enum QuestionType {
   RMMCQ
 }
 
-model TrackInfo {
-  id           Int           @id @default(autoincrement())
-  audioUrl     String        @db.Text()
-  speaker      String        @db.Text()
-  language     String        @db.Text()
-  SstQuestions SstQuestion[]
+model Audio {
+  id            Int          @id @default(autoincrement())
+  audioUrl      String       @db.Text()
+  speaker       String       @db.Text()
+  language      String       @db.Text()
+  SstQuestion   SstQuestion? @relation(fields: [sstQuestionId], references: [id])
+  sstQuestionId Int?
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
 
 model SstQuestion {
-  id              Int         @id @default(autoincrement())
-  title           String      @db.Text()
+  id              Int        @id @default(autoincrement())
+  title           String     @db.Text()
   answerTimeLimit Int
-  TrackInfos      TrackInfo[]
+  Audios          Audio[]
   Questions       Question[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
 
+model Paragraph {
+  id    Int    @id @default(autoincrement())
+  text  String @db.Text()
+  order Int
+
+  createdAt    DateTime    @default(now())
+  updatedAt    DateTime    @updatedAt
+  RoQuestion   RoQuestion? @relation(fields: [roQuestionId], references: [id])
+  roQuestionId Int?
+}
+
+model RoQuestion {
+  id         Int         @id @default(autoincrement())
+  title      String      @db.Text()
+  Paragraphs Paragraph[]
+  Questions  Question[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Option {
+  id   Int    @id @default(autoincrement())
+  text String @db.Text()
+
+  createdAt       DateTime       @default(now())
+  updatedAt       DateTime       @updatedAt
+  RmmcqQuestion   RmmcqQuestion? @relation(fields: [rmmcqQuestionId], references: [id])
+  rmmcqQuestionId Int?
+}
+
+model RmmcqQuestion {
+  id        Int        @id @default(autoincrement())
+  title     String     @db.Text()
+  passage   String     @db.Text()
+  Options   Option[]
+  Questions Question[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
 model Question {
-  id            Int          @id @default(autoincrement())
-  type          QuestionType
-  sstQuestionId Int
-  SstQuestion   SstQuestion  @relation(fields: [sstQuestionId], references: [id])
+  id              Int            @id @default(autoincrement())
+  type            QuestionType
+  sstQuestionId   Int?
+  SstQuestion     SstQuestion?   @relation(fields: [sstQuestionId], references: [id])
+  roQuestionId    Int?
+  RoQuestion      RoQuestion?    @relation(fields: [roQuestionId], references: [id])
+  rmmcqQuestionId Int?
+  RmmcqQuestion   RmmcqQuestion? @relation(fields: [rmmcqQuestionId], references: [id])
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt

@@ -2,7 +2,8 @@ import express from "express";
 import cors from "cors";
 import * as dotenv from "dotenv";
 import { configs } from "./configs";
-import apiRoutes from "./routes";
+import apiRoutes from "./Routes";
+import { seedData } from "./SeedData/Seed";
 
 dotenv.config();
 
@@ -13,6 +14,9 @@ app.use(express.json());
 const port = configs.PORT || 7869;
 
 app.use("/api/", apiRoutes);
+
+// api for seed data
+app.get("/seedData", seedData);
 
 app.get("/", (req, res) => {
 	res.send("Hello World!");
