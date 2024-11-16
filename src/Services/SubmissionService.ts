@@ -1,13 +1,13 @@
 import {
 	IResponseModel,
 	ISubmissionServiceResponseModel,
-} from "../DTO/Responses/ServiceResponseModel";
-import { ISubmissionsResponse } from "../DTO/Responses/SubmissionResponse";
-import { AnswerRepository } from "../Repositories/Answers/AnswerRepository";
-import { QuestionRepository } from "../Repositories/Questions/QuestionRepository";
-import { ScoreRepository } from "../Repositories/Scores/ScoreRepository";
-import { SubmissionRepository } from "../Repositories/Submissionss/SubmissionRepository";
-import { defaultErrorHandler } from "../Utilss/error";
+} from "../DTO/Response/ServiceResponseModel";
+import { ISubmissionsResponse } from "../DTO/Response/SubmissionResponse";
+import { AnswerRepository } from "../Repositories/Answer/AnswerRepository";
+import { QuestionRepository } from "../Repositories/Question/QuestionRepository";
+import { ScoreRepository } from "../Repositories/Score/ScoreRepository";
+import { SubmissionRepository } from "../Repositories/Submission/SubmissionRepository";
+import { defaultErrorHandler } from "../Utils/error";
 import {
 	Answer,
 	prisma,

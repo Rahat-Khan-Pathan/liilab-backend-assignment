@@ -1,4 +1,4 @@
-import { QuestionService } from "../Servicess/QuestionService";
+import { QuestionService } from "../Services/QuestionService";
 import express from "express";
 
 const QuestionRoutes = express.Router();

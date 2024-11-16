@@ -1,4 +1,4 @@
-import { defaultErrorHandler } from "../Utilss/error";
+import { defaultErrorHandler } from "../Utils/error";
 import { PrismaClient, QuestionType } from "@prisma/client";
 import { Request, Response } from "express";
 
