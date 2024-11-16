@@ -5,9 +5,9 @@ import {
 import { ISubmissionsResponse } from "../DTO/Responses/SubmissionResponse";
 import { AnswerRepository } from "../Repositories/Answers/AnswerRepository";
 import { QuestionRepository } from "../Repositories/Questions/QuestionRepository";
-import { ScoreRepository } from "../Repositories/Score/ScoreRepository";
-import { SubmissionRepository } from "../Repositories/Submissions/SubmissionRepository";
-import { defaultErrorHandler } from "../Utils/error";
+import { ScoreRepository } from "../Repositories/Scores/ScoreRepository";
+import { SubmissionRepository } from "../Repositories/Submissionss/SubmissionRepository";
+import { defaultErrorHandler } from "../Utilss/error";
 import {
 	Answer,
 	prisma,

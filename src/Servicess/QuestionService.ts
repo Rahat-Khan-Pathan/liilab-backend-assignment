@@ -1,7 +1,7 @@
 import { QuestionRepository } from "../Repositories/Questions/QuestionRepository";
 import { IQuestionDetailsResponse } from "../DTO/Responses/QuestionResponse";
 import { IQuestionResponse } from "../DTO/Responses/QuestionResponse";
-import { defaultErrorHandler } from "../Utils/error";
+import { defaultErrorHandler } from "../Utilss/error";
 import {
 	Question,
 	QuestionType,

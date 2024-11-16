@@ -2,8 +2,8 @@ import express from "express";
 import cors from "cors";
 import * as dotenv from "dotenv";
 import { configs } from "./configs";
-import apiRoutes from "./Routes";
-import { seedData } from "./SeedData/Seed";
+import apiRoutes from "./Routess";
+import { seedData } from "./SeedDatas/Seed";
 
 dotenv.config();
 

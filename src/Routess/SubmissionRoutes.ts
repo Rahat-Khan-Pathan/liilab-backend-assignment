@@ -1,4 +1,4 @@
-import { SubmissionService } from "../Services/SubmissionService";
+import { SubmissionService } from "../Servicess/SubmissionService";
 import express from "express";
 
 const SubmissionRoutes = express.Router();
