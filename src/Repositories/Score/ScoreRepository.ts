@@ -1,6 +1,6 @@
-import { PrismaClient } from "@prisma/client";
+import prismaClient from "../../DB/PrismaClient";
 
-const prisma = new PrismaClient();
+const prisma = prismaClient;
 
 interface IScore {
 	score?: number;

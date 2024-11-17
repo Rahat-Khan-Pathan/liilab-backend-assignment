@@ -1,3 +1,7 @@
+Here is the updated API documentation with the test instruction added:
+
+---
+
 # API Documentation for LiiLab Assignment
 
 ## Installation Instructions
@@ -27,6 +31,12 @@ npx prisma migrate dev
 
 ```
 npm run dev
+```
+
+5. To test the apis, run:
+
+```
+npm test
 ```
 
 ## Base URL

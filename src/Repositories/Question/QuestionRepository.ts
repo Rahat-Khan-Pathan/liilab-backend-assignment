@@ -1,10 +1,10 @@
-import { PrismaClient } from "@prisma/client";
+import prismaClient from "../../DB/PrismaClient";
 import {
 	IQuestionFilterParam,
 	IQuestionPagingModel,
 } from "./QuestionFilterParam";
 
-const prisma = new PrismaClient();
+const prisma = prismaClient;
 
 const GetAllAsync = async (
 	filter: IQuestionFilterParam,
