@@ -1,7 +1,3 @@
-Here is the updated API documentation with the test instruction added:
-
----
-
 # API Documentation for LiiLab Assignment
 
 ## Installation Instructions
