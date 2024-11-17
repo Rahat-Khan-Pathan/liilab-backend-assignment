@@ -181,6 +181,19 @@ const seedQuestions = async () => {
 		});
 	}
 };
+
+export const initialSeedData = async () => {
+	await prisma.submission.deleteMany({});
+
+	await seedAudios();
+	await seedParagraphs();
+	await seedOptions();
+	await seedSstQuestions();
+	await seedRoQuestions();
+	await seedRmmcqQuestions();
+	await seedQuestions();
+};
+
 export const seedData = async (req: Request, res: Response) => {
 	try {
 		await prisma.submission.deleteMany({});
