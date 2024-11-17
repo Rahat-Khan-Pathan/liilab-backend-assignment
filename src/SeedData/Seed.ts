@@ -192,6 +192,8 @@ export const initialSeedData = async () => {
 	await seedRoQuestions();
 	await seedRmmcqQuestions();
 	await seedQuestions();
+
+	console.log("Seed data inserted successfully!");
 };
 
 export const seedData = async (req: Request, res: Response) => {
